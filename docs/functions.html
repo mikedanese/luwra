@@ -61,6 +61,9 @@
 <li>close_state
 : <a class="el" href="structluwra_1_1StateWrapper.html#a55f83661f04e7c7ad21456207feeef01">luwra::StateWrapper</a>
 </li>
+<li>copy()
+: <a class="el" href="structluwra_1_1Pushable.html#a9417f2f05f302d6a56ad075c2ade75af">luwra::Pushable</a>
+</li>
 </ul>
 
 
@@ -80,6 +83,9 @@
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>index
 : <a class="el" href="structluwra_1_1Arbitrary.html#ab21e1bf23f5c0cde3ba0bbd443c62b63">luwra::Arbitrary</a>
+</li>
+<li>interface
+: <a class="el" href="structluwra_1_1Pushable.html#a63bcd97a5a4b5fe8b78409aff2449737">luwra::Pushable</a>
 </li>
 </ul>
 
@@ -116,16 +122,22 @@
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>push()
-: <a class="el" href="structluwra_1_1Value.html#a0a5fe33eb4fc735fde114a9bcd6cab1c">luwra::Value&lt; T &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01Arbitrary_01_4.html#a926cec7df06810965ade677d623659e1">luwra::Value&lt; Arbitrary &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01bool_01_4.html#a4e821bb6b4d3f25e27a9fde246296987">luwra::Value&lt; bool &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01CFunction_01_4.html#a3eb2895a008d383a0a6efc146d948837">luwra::Value&lt; CFunction &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01const_01char_01_5_01_4.html#ab665acca69a1b3bd8969a8d66c6bf362">luwra::Value&lt; const char * &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01std_1_1nullptr__t_01_4.html#a7e28a24be734ba269b8f15a9fe0040f8">luwra::Value&lt; std::nullptr_t &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01std_1_1string_01_4.html#acd0d530db64387de4ad4cd536fa1fc8a">luwra::Value&lt; std::string &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01std_1_1tuple_3_01A_8_8_8_01_4_01_4.html#a800dd85b92b00df83bace7c424fe6797">luwra::Value&lt; std::tuple&lt; A... &gt; &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01U_01_6_01_4.html#abdf18c10079c32d2c5b9f06f5a70f85b">luwra::Value&lt; U &amp; &gt;</a>
-, <a class="el" href="structluwra_1_1Value_3_01U_01_5_01_4.html#aaa9fd194c8867fa07243f7387ef49fad">luwra::Value&lt; U * &gt;</a>
+: <a class="el" href="structluwra_1_1Pushable.html#a0344b38789327969aedff0a7d8db21c3">luwra::Pushable</a>
+, <a class="el" href="structluwra_1_1Value.html#a04e5cc98f87a559046023cdd5dccf9b3">luwra::Value&lt; T &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01Arbitrary_01_4.html#af46a84985fb4c3032f4f0b122a67637e">luwra::Value&lt; Arbitrary &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01bool_01_4.html#a4cf7548d259262443888c5ea7ede1ac0">luwra::Value&lt; bool &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01CFunction_01_4.html#a662c4a1e404004f2b1caa6ff918c0216">luwra::Value&lt; CFunction &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01const_01char_01_5_01_4.html#a5428ea2057c0eede1adbda119ed2697c">luwra::Value&lt; const char * &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01FieldVector_01_4.html#ae1fb42b3989817d2c56aaf120b86ce62">luwra::Value&lt; FieldVector &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01Pushable_01_4.html#a4a1d3ad91e5dd853aff92d57052add91">luwra::Value&lt; Pushable &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01std_1_1nullptr__t_01_4.html#a5af93424ccdcf88139172d548808ec68">luwra::Value&lt; std::nullptr_t &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01std_1_1string_01_4.html#aeaf299009378914d5ef31b3c75082d4d">luwra::Value&lt; std::string &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01std_1_1tuple_3_01A_8_8_8_01_4_01_4.html#a8f2f676f87a7f5af1b4cc4ffe565c9fe">luwra::Value&lt; std::tuple&lt; A... &gt; &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01U_01_6_01_4.html#ac6c3dd21b3eb7e6560d9d15df082ad0f">luwra::Value&lt; U &amp; &gt;</a>
+, <a class="el" href="structluwra_1_1Value_3_01U_01_5_01_4.html#ac06a1f852072b608f04d22a4e2ca49cf">luwra::Value&lt; U * &gt;</a>
+</li>
+<li>Pushable()
+: <a class="el" href="structluwra_1_1Pushable.html#a6c714c55efd53db5738fee3bb4b9968b">luwra::Pushable</a>
 </li>
 </ul>
 
@@ -142,7 +154,7 @@
 , <a class="el" href="structluwra_1_1Value_3_01U_01_5_01_4.html#a16bf696f51a4b2729ae9ca26c5fc040d">luwra::Value&lt; U * &gt;</a>
 </li>
 <li>registerUserType()
-: <a class="el" href="structluwra_1_1StateWrapper.html#afb06c5d586848a1e8bb946afa66b5e54">luwra::StateWrapper</a>
+: <a class="el" href="structluwra_1_1StateWrapper.html#a841ea3be576b323feb0e0c4e73659d17">luwra::StateWrapper</a>
 </li>
 <li>runFile()
 : <a class="el" href="structluwra_1_1StateWrapper.html#a2247fc5292f6784e4cd3f55a68ba6f15">luwra::StateWrapper</a>
@@ -180,6 +192,9 @@
 
 
 <h3><a class="anchor" id="index_~"></a>- ~ -</h3><ul>
+<li>~Pushable()
+: <a class="el" href="structluwra_1_1Pushable.html#a5da5f86842a9f28d6b474a3fe2f27e72">luwra::Pushable</a>
+</li>
 <li>~StateWrapper()
 : <a class="el" href="structluwra_1_1StateWrapper.html#a9022ffd5a9777088b9be4e03f43287c9">luwra::StateWrapper</a>
 </li>
