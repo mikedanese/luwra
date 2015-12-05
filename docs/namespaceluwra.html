@@ -213,6 +213,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>A collection of key-value pairs. </p>
 
 </div>
 </div>
@@ -572,7 +573,14 @@ template&lt;typename S , typename F , typename... A&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Check if two values are equal. </p>
+<p>Check if two values are equal. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Lua state </td></tr>
+    <tr><td class="paramname">index1</td><td>Index of left-hand side value </td></tr>
+    <tr><td class="paramname">index2</td><td>Index of right-hand side value </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -652,7 +660,14 @@ template&lt;typename V &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Retrieve a global value. </p>
+<p>Retrieve a global value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Lua state </td></tr>
+    <tr><td class="paramname">name</td><td>Global name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structluwra_1_1Value.html">Value</a> associated with the given name </dd></dl>
 
 </div>
 </div>
@@ -1034,7 +1049,14 @@ template&lt;typename... R&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set multiple fields at once. Allows you to provide multiple key-value pairs. </p>
+<p>Set multiple fields at once. Allows you to provide multiple key-value pairs. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Lua state </td></tr>
+    <tr><td class="paramname">index</td><td>Table index </td></tr>
+    <tr><td class="paramname">args</td><td>Key-value pairs </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1075,6 +1097,14 @@ template&lt;typename... R&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Apply key-value pairs to a table. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Lua state </td></tr>
+    <tr><td class="paramname">index</td><td>Table index </td></tr>
+    <tr><td class="paramname">fields</td><td>Table fields </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1117,7 +1147,14 @@ template&lt;typename V &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Register a value as a global. </p>
+<p>Register a value as a global. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>Lua state </td></tr>
+    <tr><td class="paramname">name</td><td>Global name </td></tr>
+    <tr><td class="paramname">value</td><td>Global value </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
