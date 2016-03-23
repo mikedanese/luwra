@@ -21,12 +21,11 @@ LUWRA_NS_BEGIN
  * \param index1 Index of left-hand side value
  * \param index2 Index of right-hand side value
  */
-static inline
-bool equal(State* state, int index1, int index2) {
+static inline bool equal(State *state, int index1, int index2) {
 #if LUA_VERSION_NUM <= 501
-	return lua_equal(state, index1, index2);
+  return lua_equal(state, index1, index2);
 #else
-	return lua_compare(state, index1, index2, LUA_OPEQ);
+  return lua_compare(state, index1, index2, LUA_OPEQ);
 #endif
 }
 
@@ -35,13 +34,12 @@ bool equal(State* state, int index1, int index2) {
  * \param state Lua state
  * \param name  Metatable name
  */
-static inline
-void setMetatable(State* state, const char* name) {
+static inline void setMetatable(State *state, const char *name) {
 #if LUA_VERSION_NUM <= 501
-	luaL_getmetatable(state, name);
-	lua_setmetatable(state, -2);
+  luaL_getmetatable(state, name);
+  lua_setmetatable(state, -2);
 #else
-	luaL_setmetatable(state, name);
+  luaL_setmetatable(state, name);
 #endif
 }
 
@@ -51,10 +49,10 @@ void setMetatable(State* state, const char* name) {
  * \param name  Global name
  * \param value Global value
  */
-template <typename V> static inline
-void setGlobal(State* state, const std::string& name, V value) {
-	assert(1 == push(state, value));
-	lua_setglobal(state, name.c_str());
+template <typename V>
+static inline void setGlobal(State *state, const std::string &name, V value) {
+  assert(1 == push(state, value));
+  lua_setglobal(state, name.c_str());
 }
 
 /**
@@ -63,35 +61,33 @@ void setGlobal(State* state, const std::string& name, V value) {
  * \param name  Global name
  * \returns Value associated with the given name
  */
-template <typename V> static inline
-V getGlobal(State* state, const std::string& name) {
-	lua_getglobal(state, name.c_str());
+template <typename V>
+static inline V getGlobal(State *state, const std::string &name) {
+  lua_getglobal(state, name.c_str());
 
-	V instance = read<V>(state, -1);
-	lua_pop(state, 1);
+  V instance = read<V>(state, -1);
+  lua_pop(state, 1);
 
-	return instance;
+  return instance;
 }
 
 namespace internal {
-	template <typename K, typename V, typename... R>
-	struct EntryPusher {
-		static inline
-		void push(State* state, int index, K&& key, V&& value, R&&... rest) {
-			EntryPusher<K, V>::push(state, index, std::forward<K>(key), std::forward<V>(value));
-			EntryPusher<R...>::push(state, index, std::forward<R>(rest)...);
-		}
-	};
+template <typename K, typename V, typename... R> struct EntryPusher {
+  static inline void push(State *state, int index, K &&key, V &&value,
+                          R &&... rest) {
+    EntryPusher<K, V>::push(state, index, std::forward<K>(key),
+                            std::forward<V>(value));
+    EntryPusher<R...>::push(state, index, std::forward<R>(rest)...);
+  }
+};
 
-	template <typename K, typename V>
-	struct EntryPusher<K, V> {
-		static inline
-		void push(State* state, int index, K&& key, V&& value) {
-			assert(1 == luwra::push(state, key));
-			assert(1 == luwra::push(state, value));
-			lua_rawset(state, index < 0 ? index - 2 : index);
-		}
-	};
+template <typename K, typename V> struct EntryPusher<K, V> {
+  static inline void push(State *state, int index, K &&key, V &&value) {
+    assert(1 == luwra::push(state, key));
+    assert(1 == luwra::push(state, value));
+    lua_rawset(state, index < 0 ? index - 2 : index);
+  }
+};
 }
 
 /**
@@ -100,10 +96,10 @@ namespace internal {
  * \param index Table index
  * \param args  Key-value pairs
  */
-template <typename... R> static inline
-void setFields(State* state, int index, R&&... args) {
-	static_assert(sizeof...(R) % 2 == 0, "Field parameters must appear in pairs");
-	internal::EntryPusher<R...>::push(state, index, std::forward<R>(args)...);
+template <typename... R>
+static inline void setFields(State *state, int index, R &&... args) {
+  static_assert(sizeof...(R) % 2 == 0, "Field parameters must appear in pairs");
+  internal::EntryPusher<R...>::push(state, index, std::forward<R>(args)...);
 }
 
 /**
@@ -117,46 +113,44 @@ using FieldVector = std::vector<std::pair<Pushable, Pushable>>;
  * \param index  Table index
  * \param fields Table fields
  */
-static inline
-void setFields(State* state, int index, const FieldVector& fields) {
-	if (index < 0)
-		index = lua_gettop(state) + (index + 1);
+static inline void setFields(State *state, int index,
+                             const FieldVector &fields) {
+  if (index < 0)
+    index = lua_gettop(state) + (index + 1);
 
-	for (const auto& pair: fields) {
-		pair.first.push(state);
-		pair.second.push(state);
-		lua_rawset(state, index);
-	}
+  for (const auto &pair : fields) {
+    pair.first.push(state);
+    pair.second.push(state);
+    lua_rawset(state, index);
+  }
 }
 
-template <>
-struct Value<FieldVector> {
-	/**
-	 * Pushing a FieldVector will create a new table with the given fields.
-	 */
-	static inline
-	size_t push(State* state, const FieldVector& fields) {
-		lua_newtable(state);
-		setFields(state, -1, fields);
-		return 1;
-	}
+template <> struct Value<FieldVector> {
+  /**
+   * Pushing a FieldVector will create a new table with the given fields.
+   */
+  static inline size_t push(State *state, const FieldVector &fields) {
+    lua_newtable(state);
+    setFields(state, -1, fields);
+    return 1;
+  }
 };
 
 /**
  * Retrieve a field from a table.
  */
-template <typename V, typename K> static inline
-V getField(State* state, int index, K key) {
-	if (index < 0)
-		index = lua_gettop(state) + (index + 1);
+template <typename V, typename K>
+static inline V getField(State *state, int index, K key) {
+  if (index < 0)
+    index = lua_gettop(state) + (index + 1);
 
-	assert(push<K>(state, key) == 1);
-	lua_rawget(state, index);
+  assert(push<K>(state, key) == 1);
+  lua_rawget(state, index);
 
-	V value = read<V>(state, -1);
-	lua_pop(state, 1);
+  V value = read<V>(state, -1);
+  lua_pop(state, 1);
 
-	return value;
+  return value;
 }
 
 LUWRA_NS_END
