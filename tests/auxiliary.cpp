@@ -17,20 +17,20 @@ TEST_CASE("equal") {
   REQUIRE(luwra::equal(state, -1, -1));
 }
 
-TEST_CASE("setGlobal") {
+TEST_CASE("SetGlobal") {
   luwra::StateWrapper state;
 
-  luwra::setGlobal(state, "test", 1338);
+  luwra::SetGlobal(state, "test", 1338);
 
   REQUIRE(luaL_dostring(state, "return test") == LUA_OK);
   REQUIRE(luwra::read<int>(state, -1) == 1338);
 }
 
-TEST_CASE("getGlobal") {
+TEST_CASE("GetGlobal") {
   luwra::StateWrapper state;
 
   REQUIRE(luaL_dostring(state, "test = 1337") == LUA_OK);
-  REQUIRE(luwra::getGlobal<int>(state, "test") == 1337);
+  REQUIRE(luwra::GetGlobal<int>(state, "test") == 1337);
 }
 
 TEST_CASE("setFields") {

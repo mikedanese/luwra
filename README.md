@@ -66,7 +66,7 @@ int my_function(const char* a, int b) {
 lua_CFunction cfun = LUWRA_WRAP(my_function);
 
 // Do something with it, for example set it as a Lua global function
-luwra::setGlobal(lua, "my_function", cfun);
+luwra::SetGlobal(lua, "my_function", cfun);
 ```
 
 ```lua

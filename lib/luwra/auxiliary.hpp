@@ -50,7 +50,7 @@ static inline void setMetatable(State *state, const char *name) {
  * \param value Global value
  */
 template <typename V>
-static inline void setGlobal(State *state, const std::string &name, V value) {
+static inline void SetGlobal(State *state, const std::string &name, V value) {
   assert(1 == push(state, value));
   lua_setglobal(state, name.c_str());
 }
@@ -62,7 +62,7 @@ static inline void setGlobal(State *state, const std::string &name, V value) {
  * \returns Value associated with the given name
  */
 template <typename V>
-static inline V getGlobal(State *state, const std::string &name) {
+static inline V GetGlobal(State *state, const std::string &name) {
   lua_getglobal(state, name.c_str());
 
   V instance = read<V>(state, -1);

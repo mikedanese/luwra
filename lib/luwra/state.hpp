@@ -29,7 +29,7 @@ struct GlobalAccessor {
    * Assign a new value.
    */
   template <typename V> inline GlobalAccessor &set(V value) {
-    setGlobal(state, key, value);
+    SetGlobal(state, key, value);
     return *this;
   }
 
@@ -43,7 +43,7 @@ struct GlobalAccessor {
   /**
    * Retrieve the associated value.
    */
-  template <typename V> inline V get() { return getGlobal<V>(state, key); }
+  template <typename V> inline V get() { return GetGlobal<V>(state, key); }
 
   /**
    * Shortcut for `get()`
@@ -80,16 +80,16 @@ struct StateWrapper {
   /**
    * Retrieve a global value.
    */
-  template <typename V> inline V getGlobal(const std::string &key) const {
-    return getGlobal<V>(state, key);
+  template <typename V> inline V GetGlobal(const std::string &key) const {
+    return GetGlobal<V>(state, key);
   }
 
   /**
    * Assign a global value.
    */
   template <typename V>
-  inline void setGlobal(const std::string &key, V value) const {
-    setGlobal(state, key, value);
+  inline void SetGlobal(const std::string &key, V value) const {
+    SetGlobal(state, key, value);
   }
 
   /**

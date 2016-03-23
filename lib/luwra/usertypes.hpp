@@ -273,7 +273,7 @@ template <typename T, typename... A> struct UserTypeSignature<T(A...)> {
 
   static inline void registerConstructor(State *state,
                                          const std::string &name) {
-    setGlobal(state, name, &construct_user_type<UserType, A...>);
+    SetGlobal(state, name, &construct_user_type<UserType, A...>);
   }
 };
 }
