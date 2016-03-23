@@ -237,7 +237,7 @@ registerUserType(State *state, const MemberMap &methods = MemberMap(),
     lua_newtable(state);
 
     for (auto &method : methods) {
-      setFields(state, -1, method.first, method.second);
+      SetFields(state, -1, method.first, method.second);
     }
 
     lua_rawset(state, -3);
@@ -245,17 +245,17 @@ registerUserType(State *state, const MemberMap &methods = MemberMap(),
 
   // Register garbage-collection hook
   if (meta_methods.count("__gc") == 0) {
-    setFields(state, -1, "__gc", &internal::destruct_user_type<T>);
+    SetFields(state, -1, "__gc", &internal::destruct_user_type<T>);
   }
 
   // Register string representation function
   if (meta_methods.count("__tostring") == 0) {
-    setFields(state, -1, "__tostring", &internal::stringify_user_type<T>);
+    SetFields(state, -1, "__tostring", &internal::stringify_user_type<T>);
   }
 
   // Insert meta methods
   for (const auto &metamethod : meta_methods) {
-    setFields(state, -1, metamethod.first, metamethod.second);
+    SetFields(state, -1, metamethod.first, metamethod.second);
   }
 
   // Pop metatable off the stack

@@ -97,7 +97,7 @@ template <typename K, typename V> struct EntryPusher<K, V> {
  * \param args  Key-value pairs
  */
 template <typename... R>
-static inline void setFields(State *state, int index, R &&... args) {
+static inline void SetFields(State *state, int index, R &&... args) {
   static_assert(sizeof...(R) % 2 == 0, "Field parameters must appear in pairs");
   internal::EntryPusher<R...>::push(state, index, std::forward<R>(args)...);
 }
@@ -113,7 +113,7 @@ using FieldVector = std::vector<std::pair<Pushable, Pushable>>;
  * \param index  Table index
  * \param fields Table fields
  */
-static inline void setFields(State *state, int index,
+static inline void SetFields(State *state, int index,
                              const FieldVector &fields) {
   if (index < 0)
     index = lua_gettop(state) + (index + 1);
@@ -131,7 +131,7 @@ template <> struct Value<FieldVector> {
    */
   static inline size_t push(State *state, const FieldVector &fields) {
     lua_newtable(state);
-    setFields(state, -1, fields);
+    SetFields(state, -1, fields);
     return 1;
   }
 };
@@ -140,7 +140,7 @@ template <> struct Value<FieldVector> {
  * Retrieve a field from a table.
  */
 template <typename V, typename K>
-static inline V getField(State *state, int index, K key) {
+static inline V GetField(State *state, int index, K key) {
   if (index < 0)
     index = lua_gettop(state) + (index + 1);
 

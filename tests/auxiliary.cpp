@@ -33,12 +33,12 @@ TEST_CASE("GetGlobal") {
   REQUIRE(luwra::GetGlobal<int>(state, "test") == 1337);
 }
 
-TEST_CASE("setFields") {
+TEST_CASE("SetFields") {
   luwra::StateWrapper state;
   lua_newtable(state);
 
   SECTION("templateVersion") {
-    luwra::setFields(state, -1, "test", 1338, 123, 456);
+    luwra::SetFields(state, -1, "test", 1338, 123, 456);
 
     lua_setglobal(state, "test");
 
@@ -48,7 +48,7 @@ TEST_CASE("setFields") {
   }
 
   SECTION("mapVersion") {
-    luwra::setFields(state, -1, {{"test", 1338}, {123, 456}});
+    luwra::SetFields(state, -1, {{"test", 1338}, {123, 456}});
 
     lua_setglobal(state, "test");
 
@@ -58,11 +58,11 @@ TEST_CASE("setFields") {
   }
 }
 
-TEST_CASE("getField") {
+TEST_CASE("GetField") {
   luwra::StateWrapper state;
 
   REQUIRE(luaL_dostring(state, "return {hello = 123}") == LUA_OK);
-  REQUIRE(luwra::getField<int>(state, -1, "hello") == 123);
+  REQUIRE(luwra::GetField<int>(state, -1, "hello") == 123);
 }
 
 TEST_CASE("FieldVector") {
